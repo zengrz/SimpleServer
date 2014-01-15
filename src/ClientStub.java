@@ -2,6 +2,7 @@
  *
  * @author rey
  */
+
 import java.io.*;
 import java.net.*;
 import java.util.logging.Level;
@@ -44,9 +45,12 @@ public class ClientStub {
     private void interactWithServer() {
         input = new BufferedReader(new InputStreamReader(System.in));
         String fromServer, fromUser;
+        
         while (true) {
             try {
                 fromServer = fromSvr.readLine();
+                // Termination condition (based on server message) here, or do something with the message from server.
+                
                 fromUser = input.readLine();
                 if (fromUser != null) {
                     System.out.println("Client: " + fromUser);
@@ -68,7 +72,6 @@ public class ClientStub {
             Logger.getLogger(ClientStub.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-            
     
     /* Instance variables */
     private Socket sckt;

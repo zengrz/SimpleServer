@@ -5,14 +5,14 @@ import java.util.logging.Logger;
 
 public class KnockKnockClient {
     public static void main(String[] args) {
-        String localhostname = HOSTNAME;
+        String svrHostname = HOSTNAME;
         try {
-            localhostname = java.net.InetAddress.getLocalHost().getHostName();
+            svrHostname = java.net.InetAddress.getLocalHost().getHostName();
         } catch (UnknownHostException ex) {
             Logger.getLogger(KnockKnockClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         int port = SERVER_PORT;
-        new KnockKnockClient(localhostname, port);
+        new KnockKnockClient(svrHostname, port);
     }
     
     public KnockKnockClient(String hostName, int serverPort) {
@@ -43,13 +43,8 @@ public class KnockKnockClient {
         while (true) {
             try {
                 fromServer = in.readLine();
-                if (fromServer.equals("")) {
-                    break;
-                }
                 System.out.println("Server: " + fromServer);
-                if (fromServer.equals("Bye.")) {
-                    break;
-                }
+                if (fromServer.equals("Bye.") || fromServer.equals("")) break;
 
                 fromUser = stdIn.readLine();
                 if (fromUser != null) {
@@ -72,7 +67,6 @@ public class KnockKnockClient {
             Logger.getLogger(KnockKnockClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-            
     
     /* Instance variables */
     private Socket kkSocket;
